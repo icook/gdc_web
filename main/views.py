@@ -6,7 +6,7 @@ from models import Content
 
 def index(request):
     nav_items = Content.objects.filter(main_nav=True)
-    template = loader.get_template('main/base.html')
+    template = loader.get_template('main/pages.html')
     content = Content.objects.get(url_key='home')
     if content:
         content_ret = content.body
@@ -14,7 +14,7 @@ def index(request):
         content_ret = "<h2>Coming Soon</h2>"
     context = Context({
         'links': nav_items,
-        'content': content_ret
+        'content_val': content_ret
         
     })
     return HttpResponse(template.render(context))
@@ -25,6 +25,6 @@ def page_render(request, url_key):
     template = loader.get_template('main/pages.html')
     context = Context({
         'links': nav_items,
-        'content': content.content,
+        'content_val': content.body,
     })
     return HttpResponse(template.render(context))
