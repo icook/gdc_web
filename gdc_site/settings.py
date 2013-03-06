@@ -1,7 +1,9 @@
 # Django settings for gdc project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ROOT = os.path.dirname(os.path.realpath(__file__)) + "/../"
 
 ADMINS = (
     ('Isaac Cook', 'isaac@simpload.com'),
@@ -12,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/isaac/programming/gdc/website/gdc/sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': ROOT + 'sqlite.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -64,7 +66,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    "/home/isaac/programming/gdc/website/static",
+    ROOT + "static",
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -98,16 +100,16 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'gdc.urls'
+ROOT_URLCONF = 'gdc_site.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'gdc.wsgi.application'
+WSGI_APPLICATION = 'gdc_site.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/isaac/programming/gdc/website/templates'
+    ROOT + 'templates'
 )
 
 INSTALLED_APPS = (
@@ -121,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'main',
+    'gdc',
     'south',
 )
 
