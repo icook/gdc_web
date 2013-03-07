@@ -7,11 +7,12 @@ from models import Content, News
 def index(request):
     return page_render(request, 'home')
 
-def simple_news(request):
+def simple_news(request, nav_items):
     posts = News.objects.all().order_by('-posted')[:5]
     template = loader.get_template('main/news.html')
     context = Context({
-	'posts': posts
+	'posts': posts,
+    'links': nav_items,
     })
     return HttpResponse(template.render(context))
 
@@ -25,10 +26,10 @@ def page_render(request, url_key):
     
     # Run some logic to do our symbolic link
     if content.symbolic != "no":
-      try:
-	globals()[content.symbolic](request)
-      except KeyError:
-	return HttpResponse(loader.get_template('main/sym_error.html').render(Context({})))
+        try:
+            return globals()[content.symbolic](request, nav_items)
+        except KeyError:
+	        return HttpResponse(loader.get_template('main/sym_error.html').render(Context({'links': nav_items})))
     
     template = loader.get_template('main/pages.html')
     context = Context({
