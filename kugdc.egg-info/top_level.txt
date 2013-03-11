@@ -1,2 +1,0 @@
-gdc_site
-gdc

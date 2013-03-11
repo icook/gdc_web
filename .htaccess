@@ -1,0 +1,5 @@
+AddHandler cgi-script .cgi
+RewriteEngine On
+RewriteRule ^cgi-bin - [L]
+RewriteRule ^static - [L]
+RewriteRule ^(.*)$ /~gdc/cgi-bin/django.cgi/$1 [QSA,L]

@@ -73,11 +73,11 @@
 <body>
 
 <div id="main">
-    <div id="header"><a href="/pages/home"><img src="/static/logo.png" style="display: block; margin:auto;"/></a></div>
+    <div id="header"><a href="/pages/home"><img src="/~gdc/static/logo.png" style="display: block; margin:auto;"/></a></div>
     <div id="navigation">
         <ul>
             {% for o in links %}
-            <li><a href="/pages/{{ o.url_key }}">{{ o.title }}</a></ li>
+            <li><a href="{% url gdc.views.page_render o.url_key %}">{{ o.title }}</a></ li>
             {% endfor %}
         </ul>
     </div>
